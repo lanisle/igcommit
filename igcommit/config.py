@@ -3,6 +3,7 @@
 Copyright (c) 2016, InnoGames GmbH
 """
 
+"""
 from igcommit.commit_list_checks import (
     CheckDuplicateCommitSummaries,
     CheckMisleadingMergeCommit,
@@ -14,18 +15,20 @@ from igcommit.commit_checks import (
     CheckCommitSummary,
     CheckChangedFilePaths,
 )
+"""
 from igcommit.file_checks import (
-    CheckExecutable,
-    CheckSymlink,
+    #CheckExecutable,
+    #CheckSymlink,
     CheckCommand,
-    CheckJSON,
-    CheckXML,
-    CheckYAML,
+    #CheckJSON,
+    #CheckXML,
+    #CheckYAML,
 )
-from igcommit.git import CommittedFile
+#from igcommit.git import CommittedFile
 
 checks = []
 
+"""
 # Commit list checks
 checks.append(CheckDuplicateCommitSummaries())
 checks.append(CheckMisleadingMergeCommit())
@@ -154,18 +157,17 @@ checks.append(CheckCommand(
     header=2,
     preferred_checks=[eslint_check, jshint_check, jscs_check],
 ))
+"""
 
 # PHP
 checks.append(CheckCommand(
-    args=['phpcs', '-q', '--report=emacs'],
+    args=['phpcs', '-q', '--standard=IGG', '--report=emacs', '--stdin-path={file}'],
     extension='php',
-    config_files=[
-        CommittedFile('phpcs.xml'),
-        CommittedFile('phpcs.xml.dist'),
-    ],
 ))
 
+"""
 # Data exchange formats
 checks.append(CheckJSON())
 checks.append(CheckXML())
 checks.append(CheckYAML())
+"""
