@@ -13,7 +13,7 @@ from traceback import print_exc
 from igcommit.base_check import CheckState, prepare_checks
 from igcommit.config import checks
 from igcommit.git import Commit
-from igcommit.utils import iter_buffer
+from igcommit.utils import iter_buffer, target_files
 
 
 class Runner(object):
@@ -77,7 +77,8 @@ class Runner(object):
         for check in prepare_checks(checks, commit, next_checks):
             yield check
 
-        for changed_file in commit.get_changed_files():
+        changed_files = commit.get_changed_files()
+        for changed_file in target_files(changed_files):
             for check in self.expand_checks_to_file(next_checks, changed_file):
                 yield check
 
