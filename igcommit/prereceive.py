@@ -3,8 +3,11 @@
 Copyright (c) 2016, InnoGames GmbH
 """
 
+from __future__ import unicode_literals
+
 from collections import defaultdict
 from fileinput import input
+from sys import stdout
 from traceback import print_exc
 
 from igcommit.base_check import CheckState, prepare_checks
@@ -96,6 +99,9 @@ def main():
     try:
         state = Runner().run()
     except:
+        # Flush the problems we have printed so far to avoid the traceback
+        # appearing in between them.
+        stdout.flush()
         print_exc()
     else:
         if state >= CheckState.FAILED:
