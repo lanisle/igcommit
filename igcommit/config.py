@@ -28,6 +28,8 @@ from igcommit.file_checks import (
 )
 #from igcommit.git import CommittedFile
 
+target_inquery_api = '/opt/gitlab-extensions/pre-receive/checkinglist/inquery_api.php'
+
 checks = []
 
 """
@@ -163,7 +165,7 @@ checks.append(CheckCommand(
 
 # PHP
 checks.append(CheckCommand(
-    args=['phpcs', '-q', '--standard=IGG', '--report=emacs', '--stdin-path={file}'],
+    args=['phpcs', '-q', '--standard=IGG', '--report=emacs'],
     extension='php',
 ))
 
