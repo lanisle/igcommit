@@ -3,6 +3,8 @@
 Copyright (c) 2016, InnoGames GmbH
 """
 
+from __future__ import unicode_literals
+
 from re import compile
 from subprocess import Popen, PIPE, STDOUT
 
@@ -71,7 +73,7 @@ class CheckExecutable(CommittedFileCheck):
             else:
                 yield Severity.ERROR, 'executable file without shebang'
         elif shebang:
-            yield Severity.ERROR, 'non-executable file with shebang'
+            yield Severity.WARNING, 'non-executable file with shebang'
 
     def get_shebang_problems(self, shebang):
         if not shebang.startswith('/'):
